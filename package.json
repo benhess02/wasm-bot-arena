@@ -1,0 +1,17 @@
+{
+  "name": "wasm-bot-arena",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "npx http-server dist"
+  },
+  "keywords": [],
+  "author": "Ben Hess",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "http-server": "^14.1.1"
+  }
+}
