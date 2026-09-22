@@ -1,13 +1,26 @@
-#[link(wasm_import_module = "env")]
-unsafe extern "C" {
-    fn bot_log(str: *const u8, len: usize);
+use std::mem;
+
+mod bot;
+mod connect4;
+
+use bot::Bot;
+
+struct ExampleBot {
+    name: String,
 }
 
-pub fn log(str: &str) {
-    unsafe { bot_log(str.as_ptr(), str.len()) };
+impl Bot for ExampleBot {
+    fn init() -> Self {
+        bot::log("INIT");
+        Self {
+            name: String::from("Bot"),
+        }
+    }
+
+    fn update(&mut self) {
+        bot::log(&format!("UPDATE: {}", self.name));
+        connect4::select_column(0);
+    }
 }
 
-#[unsafe(no_mangle)]
-pub extern "C" fn init() {
-    log("Hello World!!!");
-}
+bot!(ExampleBot);
